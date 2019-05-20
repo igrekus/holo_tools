@@ -56,13 +56,13 @@ int main(int argc, char* argv[]) {
    PIX *pix_in;
 //   PIXCMAP *pix_in_cmap;
 
-   char input_file_name[50];                           // Имя входного файла с изображением (.arx)
-   char *output_file_name;                             // Имя выходного файла (.res)
+   char input_file_name[50];                           // РРјСЏ РІС…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р° СЃ РёР·РѕР±СЂР°Р¶РµРЅРёРµРј (.arx)
+   char *output_file_name;                             // РРјСЏ РІС‹С…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р° (.res)
    char *tmpstr;
    char fmtstr[20];
 
-//   char output_im_file_name[20]="outim.res";      // Имя выходного файла (.res)
-//   FILE *in, *out_re;                               // Идентификаторы входного и выходного файлов
+//   char output_im_file_name[20]="outim.res";      // РРјСЏ РІС‹С…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р° (.res)
+//   FILE *in, *out_re;                               // РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂС‹ РІС…РѕРґРЅРѕРіРѕ Рё РІС‹С…РѕРґРЅРѕРіРѕ С„Р°Р№Р»РѕРІ
 //   FILE *out_im;
 
    if (argc == 1) {
@@ -72,7 +72,7 @@ int main(int argc, char* argv[]) {
       strcpy(input_file_name, argv[1]);
    }
 
-//------------------ Считываем файл leptonica-ой ----------------------------
+//------------------ РЎС‡РёС‚С‹РІР°РµРј С„Р°Р№Р» leptonica-РѕР№ ----------------------------
    printf("\nReading input...");
    pix_in=pixRead(input_file_name);
 
@@ -175,7 +175,7 @@ int main(int argc, char* argv[]) {
 //   pix_in_cmap=pixGetColormap(pix_in);
 //   data = pixGetData(pix_in);
 
-//------------------ Выдеяем память под массивы -----------------------------
+//------------------ Р’С‹РґРµСЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ РјР°СЃСЃРёРІС‹ -----------------------------
    double_amp = (double*) fftw_malloc(w*h*sizeof(double));
    double_phs = (double*) fftw_malloc(w*h*sizeof(double));
    bitmap_re = (unsigned char*) fftw_malloc(w*h*sizeof(unsigned char));
@@ -213,36 +213,36 @@ int main(int argc, char* argv[]) {
 
    printf("Retrieveing image...");
 
-//---------- Подготовка FFTW ------------------------------------------------
+//---------- РџРѕРґРіРѕС‚РѕРІРєР° FFTW ------------------------------------------------
    plan_fwd = fftw_plan_dft_2d(Nx, Ny, com_image, com_image, FFTW_FORWARD, FFTW_ESTIMATE);
    plan_bwd = fftw_plan_dft_2d(Nx, Ny, com_image, com_image, FFTW_BACKWARD, FFTW_ESTIMATE);
 //   plan_fwd = fftw_plan_dft_2d(Nx, Ny, &com_image[0][0], &com_image[0][0], FFTW_FORWARD, FFTW_ESTIMATE);
 //   plan_bwd = fftw_plan_dft_2d(Nx, Ny, &com_image[0][0], &com_image[0][0], FFTW_BACKWARD, FFTW_ESTIMATE);
 
-//---------- Считываем растр фазового рельефа -------------------------------
+//---------- РЎС‡РёС‚С‹РІР°РµРј СЂР°СЃС‚СЂ С„Р°Р·РѕРІРѕРіРѕ СЂРµР»СЊРµС„Р° -------------------------------
 //   fread(bitmap_re, KINO_SIZE_X*KINO_SIZE_Y*sizeof(unsigned char), 1, in);
-//---------- Преобразовываем растр в массив double и нормируем на 1 ---------
+//---------- РџСЂРµРѕР±СЂР°Р·РѕРІС‹РІР°РµРј СЂР°СЃС‚СЂ РІ РјР°СЃСЃРёРІ double Рё РЅРѕСЂРјРёСЂСѓРµРј РЅР° 1 ---------
    bitmap_to_double(double_phs, bitmap_re, w, h);
    norm_double(double_phs, w, h, 1);
-//---------- Бинарный рельеф? -----------------------------------------------
+//---------- Р‘РёРЅР°СЂРЅС‹Р№ СЂРµР»СЊРµС„? -----------------------------------------------
    bin=is_bin(bitmap_re, w, h);
-   if (bin) {norm_pi_minus_pi(double_phs, w, h);} // Нормируем phs*2pi-pi
-   else {norm_2pi_minus_pi(double_phs, w, h);}    // Нормируем phs*pi-pi
-//---------- Амплитуда=1 ----------------------------------------------------
+   if (bin) {norm_pi_minus_pi(double_phs, w, h);} // РќРѕСЂРјРёСЂСѓРµРј phs*2pi-pi
+   else {norm_2pi_minus_pi(double_phs, w, h);}    // РќРѕСЂРјРёСЂСѓРµРј phs*pi-pi
+//---------- РђРјРїР»РёС‚СѓРґР°=1 ----------------------------------------------------
    double_fill_plane(double_amp, w, h, 1, RND_FALSE);
 //---------- com_image=1*exp(i*phs) -----------------------------------------
    make_complex((double *)com_image, double_amp, double_phs, w, h);
-//---------- Фурье +1 -------------------------------------------------------
+//---------- Р¤СѓСЂСЊРµ +1 -------------------------------------------------------
    fftw_execute(plan_fwd);
-//---------- Получаем амплитуды ---------------------------------------------
+//---------- РџРѕР»СѓС‡Р°РµРј Р°РјРїР»РёС‚СѓРґС‹ ---------------------------------------------
    com_get_amp((double *)com_image, double_amp, w, h);
-//---------- Меняем четверти местами ----------------------------------------
+//---------- РњРµРЅСЏРµРј С‡РµС‚РІРµСЂС‚Рё РјРµСЃС‚Р°РјРё ----------------------------------------
    double_shift(double_amp, w, h);
-//---------- Натягиваем палитру 0-255 grayscale -----------------------------
+//---------- РќР°С‚СЏРіРёРІР°РµРј РїР°Р»РёС‚СЂСѓ 0-255 grayscale -----------------------------
    double_rescale(double_amp, w, h, 0, 255);
-//---------- Конвертим в битмап ---------------------------------------------
+//---------- РљРѕРЅРІРµСЂС‚РёРј РІ Р±РёС‚РјР°Рї ---------------------------------------------
    double_to_bitmap(double_amp, bitmap_re, w, h);
-//---------- Пишем в файл ---------------------------------------------------
+//---------- РџРёС€РµРј РІ С„Р°Р№Р» ---------------------------------------------------
 //   fwrite(bitmap_re, KINO_SIZE_X*KINO_SIZE_Y*sizeof(unsigned char), 1, out_re);
    printf("ok.\n");
    printf("Writing output...");
@@ -261,14 +261,14 @@ int main(int argc, char* argv[]) {
 //   double_echo(double_amp, KINO_SIZE_X, KINO_SIZE_Y);
 
 l1:
-//--------- Завершаем работу с FFTW -----------------------------------------
+//--------- Р—Р°РІРµСЂС€Р°РµРј СЂР°Р±РѕС‚Сѓ СЃ FFTW -----------------------------------------
    fftw_destroy_plan(plan_fwd);
    fftw_destroy_plan(plan_bwd);
 
-//--------- Завершаем работу с PIX ------------------------------------------
+//--------- Р—Р°РІРµСЂС€Р°РµРј СЂР°Р±РѕС‚Сѓ СЃ PIX ------------------------------------------
    pixDestroy(&pix_in);
 
-//---------- Освобождаем память ---------------------------------------------
+//---------- РћСЃРІРѕР±РѕР¶РґР°РµРј РїР°РјСЏС‚СЊ ---------------------------------------------
    fftw_free(double_amp);
    fftw_free(double_phs);
    fftw_free(bitmap_re);

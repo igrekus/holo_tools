@@ -27,7 +27,7 @@
 #define COLOR_MAX 255
 
 int bitmap_to_double(double *double_buff, unsigned char *bmp_buff, int size_x, int size_y) {
-// Конвертим растр в массив double
+// РљРѕРЅРІРµСЂС‚РёРј СЂР°СЃС‚СЂ РІ РјР°СЃСЃРёРІ double
    int i, j;
    for (j=0; j<size_y; j++) {
       for (i=0; i<size_x; i++) {
@@ -39,9 +39,9 @@ int bitmap_to_double(double *double_buff, unsigned char *bmp_buff, int size_x, i
 }
 
 int com_bitmap_to_plane(double *com_buff, unsigned char *bmp_buff, int size_x, int size_y, int plane) {
-// Заполняем одну из плоскостей комплексной матрицей заданным растром
-// В программе расшифровки изображенией эта функция работает по-другому!
-// plane - действительная/мнимая (0/1) части комплексной матрицы
+// Р—Р°РїРѕР»РЅСЏРµРј РѕРґРЅСѓ РёР· РїР»РѕСЃРєРѕСЃС‚РµР№ РєРѕРјРїР»РµРєСЃРЅРѕР№ РјР°С‚СЂРёС†РµР№ Р·Р°РґР°РЅРЅС‹Рј СЂР°СЃС‚СЂРѕРј
+// Р’ РїСЂРѕРіСЂР°РјРјРµ СЂР°СЃС€РёС„СЂРѕРІРєРё РёР·РѕР±СЂР°Р¶РµРЅРёРµР№ СЌС‚Р° С„СѓРЅРєС†РёСЏ СЂР°Р±РѕС‚Р°РµС‚ РїРѕ-РґСЂСѓРіРѕРјСѓ!
+// plane - РґРµР№СЃС‚РІРёС‚РµР»СЊРЅР°СЏ/РјРЅРёРјР°СЏ (0/1) С‡Р°СЃС‚Рё РєРѕРјРїР»РµРєСЃРЅРѕР№ РјР°С‚СЂРёС†С‹
    int i, j;
    for (j=0; j<size_y; j++) {
       for (i=0; i<size_x; i++) {
@@ -53,8 +53,8 @@ int com_bitmap_to_plane(double *com_buff, unsigned char *bmp_buff, int size_x, i
 }
 
 int com_copy_image(double *com_src, double *com_dst, int size_x, int size_y) {
-// Копировать src комплексную матрицу в dst матрицу
-// todo Оптимизировать под линейный массив размером size_x*size_y
+// РљРѕРїРёСЂРѕРІР°С‚СЊ src РєРѕРјРїР»РµРєСЃРЅСѓСЋ РјР°С‚СЂРёС†Сѓ РІ dst РјР°С‚СЂРёС†Сѓ
+// todo РћРїС‚РёРјРёР·РёСЂРѕРІР°С‚СЊ РїРѕРґ Р»РёРЅРµР№РЅС‹Р№ РјР°СЃСЃРёРІ СЂР°Р·РјРµСЂРѕРј size_x*size_y
    int i, j;
    for (j=0; j<size_y; j++) {
       for (i=0; i<size_x; i++) {
@@ -67,7 +67,7 @@ int com_copy_image(double *com_src, double *com_dst, int size_x, int size_y) {
 }
 
 int com_echo(double *com_buff, int size_x, int size_y) {
-// Вывод содержимого комплексного массива на экран для отладки
+// Р’С‹РІРѕРґ СЃРѕРґРµСЂР¶РёРјРѕРіРѕ РєРѕРјРїР»РµРєСЃРЅРѕРіРѕ РјР°СЃСЃРёРІР° РЅР° СЌРєСЂР°РЅ РґР»СЏ РѕС‚Р»Р°РґРєРё
    int i, j;
    for (j=0; j<size_y; j++) {
       for (i=0; i<size_x; i++) {
@@ -78,8 +78,8 @@ int com_echo(double *com_buff, int size_x, int size_y) {
 }
 
 int com_fill_plane(double *com_buff, int size_x, int size_y, int plane, int  val, int rnd) {
-// Заполняем заданную плоскость заданным значением
-// plane - действительная/мнимая = (0)/(1) части матрицы
+// Р—Р°РїРѕР»РЅСЏРµРј Р·Р°РґР°РЅРЅСѓСЋ РїР»РѕСЃРєРѕСЃС‚СЊ Р·Р°РґР°РЅРЅС‹Рј Р·РЅР°С‡РµРЅРёРµРј
+// plane - РґРµР№СЃС‚РІРёС‚РµР»СЊРЅР°СЏ/РјРЅРёРјР°СЏ = (0)/(1) С‡Р°СЃС‚Рё РјР°С‚СЂРёС†С‹
    int i, j;
    if (rnd) {
       for (j=0; j<size_y; j++) {
@@ -100,7 +100,7 @@ int com_fill_plane(double *com_buff, int size_x, int size_y, int plane, int  val
 }
 
 int com_get_amp(double *com_buff, double *double_buff, int size_x, int size_y) {
-// Получаем амплитуды копмлексной матрицы
+// РџРѕР»СѓС‡Р°РµРј Р°РјРїР»РёС‚СѓРґС‹ РєРѕРїРјР»РµРєСЃРЅРѕР№ РјР°С‚СЂРёС†С‹
    int i, j;
    for (j=0; j<size_y; j++) {
       for (i=0; i<size_x; i++) {
@@ -112,8 +112,8 @@ int com_get_amp(double *com_buff, double *double_buff, int size_x, int size_y) {
 }
 
 int com_get_phase(double *com_buff, double *double_buff, int size_x, int size_y) {
-// Получаем амплитуды копмлексной матрицы
-// Не совпадают минусы
+// РџРѕР»СѓС‡Р°РµРј Р°РјРїР»РёС‚СѓРґС‹ РєРѕРїРјР»РµРєСЃРЅРѕР№ РјР°С‚СЂРёС†С‹
+// РќРµ СЃРѕРІРїР°РґР°СЋС‚ РјРёРЅСѓСЃС‹
    int i, j;
    for (j=0; j<size_y; j++) {
       for (i=0; i<size_x; i++) {
@@ -125,8 +125,8 @@ int com_get_phase(double *com_buff, double *double_buff, int size_x, int size_y)
 }
 
 int com_plane_to_bitmap(double *com_buff, unsigned char *bmp_buff, int size_x, int size_y, int plane) {
-// Выдираем одну из частей комплексной матрицы и конвертим её в битмап
-// plane - действительная/мнимая (0/1) части комплексной матрицы
+// Р’С‹РґРёСЂР°РµРј РѕРґРЅСѓ РёР· С‡Р°СЃС‚РµР№ РєРѕРјРїР»РµРєСЃРЅРѕР№ РјР°С‚СЂРёС†С‹ Рё РєРѕРЅРІРµСЂС‚РёРј РµС‘ РІ Р±РёС‚РјР°Рї
+// plane - РґРµР№СЃС‚РІРёС‚РµР»СЊРЅР°СЏ/РјРЅРёРјР°СЏ (0/1) С‡Р°СЃС‚Рё РєРѕРјРїР»РµРєСЃРЅРѕР№ РјР°С‚СЂРёС†С‹
    int i, j;
    for (j=0; j<size_y; j++) {
       for (i=0; i<size_x; i++) {
@@ -137,8 +137,8 @@ int com_plane_to_bitmap(double *com_buff, unsigned char *bmp_buff, int size_x, i
 }
 
 double com_rmse(double *double_buff1, double *double_buff2, int size_x, int size_y) {
-// Вычисляем среднеквадратичное отклонение между buff1 и buff2
-// Квадратный корень из среднего по всем (buff1-buff2)^2
+// Р’С‹С‡РёСЃР»СЏРµРј СЃСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РЅРѕРµ РѕС‚РєР»РѕРЅРµРЅРёРµ РјРµР¶РґСѓ buff1 Рё buff2
+// РљРІР°РґСЂР°С‚РЅС‹Р№ РєРѕСЂРµРЅСЊ РёР· СЃСЂРµРґРЅРµРіРѕ РїРѕ РІСЃРµРј (buff1-buff2)^2
    int i, j;
    double tmp=0;
    for (j=0; j<size_y; j++) {
@@ -177,13 +177,13 @@ int com_shift(double *com_buff, int size_x, int size_y) {
             *(com_buff+2*((ny+j)*size_x+i)+PLANE_IM)=tmp_im;
          }
       }
-   } else {    // пока не работает
+   } else {    // РїРѕРєР° РЅРµ СЂР°Р±РѕС‚Р°РµС‚
    }
    return 0;
 }
 
 double double_avg(double *double_buff, int size_x, int size_y, int absol) {
-// Вычисляем среднее по вещественной матрице
+// Р’С‹С‡РёСЃР»СЏРµРј СЃСЂРµРґРЅРµРµ РїРѕ РІРµС‰РµСЃС‚РІРµРЅРЅРѕР№ РјР°С‚СЂРёС†Рµ
    int i, j;
    double tmp=0;
    if (absol) {
@@ -204,9 +204,9 @@ double double_avg(double *double_buff, int size_x, int size_y, int absol) {
    return tmp;
 }
 
-// Бинаризация по углам - приемлемо
+// Р‘РёРЅР°СЂРёР·Р°С†РёСЏ РїРѕ СѓРіР»Р°Рј - РїСЂРёРµРјР»РµРјРѕ
 int double_binarize(double *double_buff, int size_x, int size_y) {
-// Бинаризуем массив double
+// Р‘РёРЅР°СЂРёР·СѓРµРј РјР°СЃСЃРёРІ double
    int i, j;
    for (j=0; j<size_y; j++) {
       for (i=0; i<size_x; i++) {
@@ -218,9 +218,9 @@ int double_binarize(double *double_buff, int size_x, int size_y) {
 }
 /**/
 
-/*// Бинаризация по среднему уровню - приемлемо
+/*// Р‘РёРЅР°СЂРёР·Р°С†РёСЏ РїРѕ СЃСЂРµРґРЅРµРјСѓ СѓСЂРѕРІРЅСЋ - РїСЂРёРµРјР»РµРјРѕ
 int double_binarize(double *double_buff, int size_x, int size_y) {
-// Бинаризуем массив double
+// Р‘РёРЅР°СЂРёР·СѓРµРј РјР°СЃСЃРёРІ double
    int i, j;
    double mid;
    double min=*(double_buff+0*size_x+0);
@@ -249,9 +249,9 @@ int double_binarize(double *double_buff, int size_x, int size_y) {
 }
 /**/
 
-/*// Бинаризация методом Otsu - плохой результат
+/*// Р‘РёРЅР°СЂРёР·Р°С†РёСЏ РјРµС‚РѕРґРѕРј Otsu - РїР»РѕС…РѕР№ СЂРµР·СѓР»СЊС‚Р°С‚
 int double_binarize(double *double_buff, int size_x, int size_y) {
-// Бинаризуем массив double
+// Р‘РёРЅР°СЂРёР·СѓРµРј РјР°СЃСЃРёРІ double
    int i, j;
    double min=*(double_buff+0*size_x+0);
    double max=*(double_buff+0*size_x+0);
@@ -263,7 +263,7 @@ int double_binarize(double *double_buff, int size_x, int size_y) {
    double sigma, max_sigma=-1;
    double w1, a;
 
-// Выбираем порог бинаризации методом Otsu
+// Р’С‹Р±РёСЂР°РµРј РїРѕСЂРѕРі Р±РёРЅР°СЂРёР·Р°С†РёРё РјРµС‚РѕРґРѕРј Otsu
    double_rescale(double_buff, size_x, size_y, COLOR_MIN, COLOR_MAX);
 
    for (j=0; j<size_y; j++) {
@@ -274,7 +274,7 @@ int double_binarize(double *double_buff, int size_x, int size_y) {
       }
    }
 
-// Память под гистограмму
+// РџР°РјСЏС‚СЊ РїРѕРґ РіРёСЃС‚РѕРіСЂР°РјРјСѓ
    hist_size=max-min+1;
 
    if((hist=(int*)malloc(sizeof(int)*hist_size))==NULL) return -1;
@@ -283,7 +283,7 @@ int double_binarize(double *double_buff, int size_x, int size_y) {
       hist[i]=0;
    }
 
-// Строим гистограмму
+// РЎС‚СЂРѕРёРј РіРёСЃС‚РѕРіСЂР°РјРјСѓ
    for (i=0; i<size_x*size_y; i++) {
       temp_ind=(int)(*(double_buff+i))-min;
       hist[temp_ind]++;
@@ -292,15 +292,15 @@ int double_binarize(double *double_buff, int size_x, int size_y) {
    temp=temp1=0;
    alpha=beta=0;
 
-// Для расяета матожидания 1го класса
+// Р”Р»СЏ СЂР°СЃСЏРµС‚Р° РјР°С‚РѕР¶РёРґР°РЅРёСЏ 1РіРѕ РєР»Р°СЃСЃР°
 
    for (i=0; i<=(max-min); i++) {
       temp=temp+i*hist[i];
       temp1=temp1+hist[i];
    }
 
-// Основной цикл поиска порога
-// Проверяем все полутона, ищем то, при котором внутриклассовая дисперсия -> min
+// РћСЃРЅРѕРІРЅРѕР№ С†РёРєР» РїРѕРёСЃРєР° РїРѕСЂРѕРіР°
+// РџСЂРѕРІРµСЂСЏРµРј РІСЃРµ РїРѕР»СѓС‚РѕРЅР°, РёС‰РµРј С‚Рѕ, РїСЂРё РєРѕС‚РѕСЂРѕРј РІРЅСѓС‚СЂРёРєР»Р°СЃСЃРѕРІР°СЏ РґРёСЃРїРµСЂСЃРёСЏ -> min
 
    for (i=0; i<=(max-min); i++) {
       alpha=alpha+i*hist[i];
@@ -333,7 +333,7 @@ int double_binarize(double *double_buff, int size_x, int size_y) {
 /**/
 
 int double_echo(double *double_buff, int size_x, int size_y) {
-// Вывод содержимого массива doble на экран для отладки
+// Р’С‹РІРѕРґ СЃРѕРґРµСЂР¶РёРјРѕРіРѕ РјР°СЃСЃРёРІР° doble РЅР° СЌРєСЂР°РЅ РґР»СЏ РѕС‚Р»Р°РґРєРё
    int i, j;
    for (j=0; j<size_y; j++) {
       for (i=0; i<size_x; i++) {
@@ -344,8 +344,8 @@ int double_echo(double *double_buff, int size_x, int size_y) {
 }
 
 int double_fill_plane(double *double_buff, int size_x, int size_y, int val, int rnd) {
-// Заполняем массив double заданным значением
-// plane - действительная/мнимая = (0)/(1) части матрицы
+// Р—Р°РїРѕР»РЅСЏРµРј РјР°СЃСЃРёРІ double Р·Р°РґР°РЅРЅС‹Рј Р·РЅР°С‡РµРЅРёРµРј
+// plane - РґРµР№СЃС‚РІРёС‚РµР»СЊРЅР°СЏ/РјРЅРёРјР°СЏ = (0)/(1) С‡Р°СЃС‚Рё РјР°С‚СЂРёС†С‹
    int i, j;
    if (rnd) {
       for (j=0; j<size_y; j++) {
@@ -365,9 +365,9 @@ int double_fill_plane(double *double_buff, int size_x, int size_y, int val, int 
 }
 
 int double_rescale(double *double_buff, int size_x, int size_y, int c_min, int c_max) {
-// Здесь нормализуем массив на отрезке 0..255 для вывода
-// grad=1 - плавный градиент от 0 да 255
-// grad=0 - отрезаем все, что <0 (бинаризация)
+// Р—РґРµСЃСЊ РЅРѕСЂРјР°Р»РёР·СѓРµРј РјР°СЃСЃРёРІ РЅР° РѕС‚СЂРµР·РєРµ 0..255 РґР»СЏ РІС‹РІРѕРґР°
+// grad=1 - РїР»Р°РІРЅС‹Р№ РіСЂР°РґРёРµРЅС‚ РѕС‚ 0 РґР° 255
+// grad=0 - РѕС‚СЂРµР·Р°РµРј РІСЃРµ, С‡С‚Рѕ <0 (Р±РёРЅР°СЂРёР·Р°С†РёСЏ)
    int i, j;
    double low=255;
    double high=-255;
@@ -391,7 +391,7 @@ int double_rescale(double *double_buff, int size_x, int size_y, int c_min, int c
       }
    }
 
-/* бинаризация
+/* Р±РёРЅР°СЂРёР·Р°С†РёСЏ
       mid=low+(high-low)/2;
       for (j=0; j<size_y; j++) {
 	   	for (i=0; i<size_x; i++) {
@@ -408,7 +408,7 @@ int double_rescale(double *double_buff, int size_x, int size_y, int c_min, int c
 }
 
 int double_shift(double *double_buff, int size_x, int size_y) {
-// Меняем четверти массива местами по диагонали
+// РњРµРЅСЏРµРј С‡РµС‚РІРµСЂС‚Рё РјР°СЃСЃРёРІР° РјРµСЃС‚Р°РјРё РїРѕ РґРёР°РіРѕРЅР°Р»Рё
    div_t x, y;
    int i, j;
    int nx, ny;
@@ -428,7 +428,7 @@ int double_shift(double *double_buff, int size_x, int size_y) {
             *(double_buff+(ny+j)*size_x+i)=tmp;
          }
       }
-   } else {    // пока не работает
+   } else {    // РїРѕРєР° РЅРµ СЂР°Р±РѕС‚Р°РµС‚
       if ((x.rem==1)&&(y.rem==1)) {
          for (j=0; j<ny; j++) {
             for (i=0; i<nx; i++) {
@@ -446,7 +446,7 @@ int double_shift(double *double_buff, int size_x, int size_y) {
 }
 
 int double_sinc(double *double_buff, int size_x, int size_y, double corr) {
-// Корректируем интенсивность входного изображения по sinc=sin(x)/x
+// РљРѕСЂСЂРµРєС‚РёСЂСѓРµРј РёРЅС‚РµРЅСЃРёРІРЅРѕСЃС‚СЊ РІС…РѕРґРЅРѕРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РїРѕ sinc=sin(x)/x
    int i, j, N, r;
    double x, cs;
    double *sinc_array;
@@ -454,7 +454,7 @@ int double_sinc(double *double_buff, int size_x, int size_y, double corr) {
    N=size_y;
    cs=corr;
 
-// Выделяем память под массив коэффициентов sinc
+// Р’С‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ РјР°СЃСЃРёРІ РєРѕСЌС„С„РёС†РёРµРЅС‚РѕРІ sinc
    sinc_array=(double*)fftw_malloc(1.5*N*sizeof(double));
 
    sinc_array[0]=1;
@@ -477,7 +477,7 @@ int double_sinc(double *double_buff, int size_x, int size_y, double corr) {
 
 
 int double_to_bitmap(double *double_buff, unsigned char *bmp_buff, int size_x, int size_y) {
-// Конвертим массив double в битмап
+// РљРѕРЅРІРµСЂС‚РёРј РјР°СЃСЃРёРІ double РІ Р±РёС‚РјР°Рї
    int i, j;
    for (j=0; j<size_y; j++) {
       for (i=0; i<size_x; i++) {
@@ -488,7 +488,7 @@ int double_to_bitmap(double *double_buff, unsigned char *bmp_buff, int size_x, i
 }
 
 int fill_double(double *double_buff, int size_x, int size_y, int val, int rnd) {
-// Заполняем массив double заданным значением
+// Р—Р°РїРѕР»РЅСЏРµРј РјР°СЃСЃРёРІ double Р·Р°РґР°РЅРЅС‹Рј Р·РЅР°С‡РµРЅРёРµРј
    int i, j;
    if (rnd) {
       for (j=0; j<size_y; j++) {
@@ -509,8 +509,8 @@ int fill_double(double *double_buff, int size_x, int size_y, int val, int rnd) {
 }
 
 int get_plane(double *com_buff, double *double_buff, int size_x, int size_y, int plane) {
-// Вытаскиваем одну из комплексных плоскостей
-// plane - действительная/мнимая (0/1) части комплексной матрицы
+// Р’С‹С‚Р°СЃРєРёРІР°РµРј РѕРґРЅСѓ РёР· РєРѕРјРїР»РµРєСЃРЅС‹С… РїР»РѕСЃРєРѕСЃС‚РµР№
+// plane - РґРµР№СЃС‚РІРёС‚РµР»СЊРЅР°СЏ/РјРЅРёРјР°СЏ (0/1) С‡Р°СЃС‚Рё РєРѕРјРїР»РµРєСЃРЅРѕР№ РјР°С‚СЂРёС†С‹
    int i, j;
    for (j=0; j<size_y; j++) {
       for (i=0; i<size_x; i++) {
@@ -521,8 +521,8 @@ int get_plane(double *com_buff, double *double_buff, int size_x, int size_y, int
 }
 
 int get_plane_abs(double *com_buff, double *double_buff, int size_x, int size_y, int plane) {
-// Вытаскиваем одну из комплексных плоскостей
-// plane - действительная/мнимая (0/1) части комплексной матрицы
+// Р’С‹С‚Р°СЃРєРёРІР°РµРј РѕРґРЅСѓ РёР· РєРѕРјРїР»РµРєСЃРЅС‹С… РїР»РѕСЃРєРѕСЃС‚РµР№
+// plane - РґРµР№СЃС‚РІРёС‚РµР»СЊРЅР°СЏ/РјРЅРёРјР°СЏ (0/1) С‡Р°СЃС‚Рё РєРѕРјРїР»РµРєСЃРЅРѕР№ РјР°С‚СЂРёС†С‹
    int i, j;
    for (j=0; j<size_y; j++) {
       for (i=0; i<size_x; i++) {
@@ -534,7 +534,7 @@ int get_plane_abs(double *com_buff, double *double_buff, int size_x, int size_y,
 }
 
 int is_bin(unsigned char *bmp_buff, int size_x, int size_y) {
-// Определяем бинарный битмап или нет.
+// РћРїСЂРµРґРµР»СЏРµРј Р±РёРЅР°СЂРЅС‹Р№ Р±РёС‚РјР°Рї РёР»Рё РЅРµС‚.
    int i, j;
    int num_col=0;
    unsigned int colors[256];
@@ -559,8 +559,8 @@ int is_bin(unsigned char *bmp_buff, int size_x, int size_y) {
 }
 
 int make_complex(double *com_buff, double *double_buff_amp, double *double_buff_phs, int size_x, int size_y) {
-// Образуем комплексное число через экспоненциальную запись
-// (переводим из экспоненциальной записи в координатную)
+// РћР±СЂР°Р·СѓРµРј РєРѕРјРїР»РµРєСЃРЅРѕРµ С‡РёСЃР»Рѕ С‡РµСЂРµР· СЌРєСЃРїРѕРЅРµРЅС†РёР°Р»СЊРЅСѓСЋ Р·Р°РїРёСЃСЊ
+// (РїРµСЂРµРІРѕРґРёРј РёР· СЌРєСЃРїРѕРЅРµРЅС†РёР°Р»СЊРЅРѕР№ Р·Р°РїРёСЃРё РІ РєРѕРѕСЂРґРёРЅР°С‚РЅСѓСЋ)
    int i, j;
    for (j=0; j<size_y; j++) {
       for (i=0; i<size_x; i++) {
@@ -573,7 +573,7 @@ int make_complex(double *com_buff, double *double_buff_amp, double *double_buff_
 }
 
 int norm_2pi_minus_pi(double *double_buff, int size_x, int size_y) {
-// Нормализуем фазу по phs=phs*2pi-pi
+// РќРѕСЂРјР°Р»РёР·СѓРµРј С„Р°Р·Сѓ РїРѕ phs=phs*2pi-pi
    int i, j;
    for (j=0; j<size_y; j++) {
       for (i=0; i<size_x; i++) {
@@ -584,7 +584,7 @@ int norm_2pi_minus_pi(double *double_buff, int size_x, int size_y) {
 }
 
 int norm_avg(double *double_buff, int size_x, int size_y, double avg1, double avg2) {
-// Нормализация по двум средним
+// РќРѕСЂРјР°Р»РёР·Р°С†РёСЏ РїРѕ РґРІСѓРј СЃСЂРµРґРЅРёРј
    int i, j;
    for (j=0; j<size_y; j++) {
       for (i=0; i<size_x; i++) {
@@ -602,9 +602,9 @@ int norm_avg(double *double_buff, int size_x, int size_y, double avg1, double av
 }
 
 int norm_com(double *com_buff, int size_x, int size_y, int plane, double val) {
-// Нормализуем комплексный массив по значению val
-// plane - действительная/мнимая (0/1) части комплексной матрицы
-// plane=2 - нормализация обеих плоскостей сразу
+// РќРѕСЂРјР°Р»РёР·СѓРµРј РєРѕРјРїР»РµРєСЃРЅС‹Р№ РјР°СЃСЃРёРІ РїРѕ Р·РЅР°С‡РµРЅРёСЋ val
+// plane - РґРµР№СЃС‚РІРёС‚РµР»СЊРЅР°СЏ/РјРЅРёРјР°СЏ (0/1) С‡Р°СЃС‚Рё РєРѕРјРїР»РµРєСЃРЅРѕР№ РјР°С‚СЂРёС†С‹
+// plane=2 - РЅРѕСЂРјР°Р»РёР·Р°С†РёСЏ РѕР±РµРёС… РїР»РѕСЃРєРѕСЃС‚РµР№ СЃСЂР°Р·Сѓ
    int i, j;
    double max_re=*(com_buff+2*(0*size_x+0)+PLANE_RE);
    double max_im=*(com_buff+2*(0*size_x+0)+PLANE_IM);
@@ -643,7 +643,7 @@ int norm_com(double *com_buff, int size_x, int size_y, int plane, double val) {
 }
 
 int norm_double(double *double_buff, int size_x, int size_y, double val) {
-// Нормализуем вещественный массив по значению val
+// РќРѕСЂРјР°Р»РёР·СѓРµРј РІРµС‰РµСЃС‚РІРµРЅРЅС‹Р№ РјР°СЃСЃРёРІ РїРѕ Р·РЅР°С‡РµРЅРёСЋ val
    int i, j;
    double max=*(double_buff+0*size_x+0);
    for (j=0; j<size_y; j++) {
@@ -663,7 +663,7 @@ int norm_double(double *double_buff, int size_x, int size_y, double val) {
 }
 
 int norm_fft(double *com_buff, int size_x, int size_y) {
-// Нормализация матрицы на n=size_x*size_y после fft-1
+// РќРѕСЂРјР°Р»РёР·Р°С†РёСЏ РјР°С‚СЂРёС†С‹ РЅР° n=size_x*size_y РїРѕСЃР»Рµ fft-1
    int i, j;
    int n=size_x*size_y;
    for (j=0; j<size_y; j++) {
@@ -677,7 +677,7 @@ int norm_fft(double *com_buff, int size_x, int size_y) {
 }
 
 int norm_pi_minus_pi(double *double_buff, int size_x, int size_y) {
-// Нормализуем фазу по phs=phs*2pi-pi
+// РќРѕСЂРјР°Р»РёР·СѓРµРј С„Р°Р·Сѓ РїРѕ phs=phs*2pi-pi
    int i, j;
    for (j=0; j<size_y; j++) {
       for (i=0; i<size_x; i++) {
@@ -688,8 +688,8 @@ int norm_pi_minus_pi(double *double_buff, int size_x, int size_y) {
 }
 
 int set_plane(double *com_buff, double *double_buff, int size_x, int size_y, int plane) {
-// Заполняем одну из комплексных плоскостей
-// plane - действительная/мнимая (0/1) части комплексной матрицы
+// Р—Р°РїРѕР»РЅСЏРµРј РѕРґРЅСѓ РёР· РєРѕРјРїР»РµРєСЃРЅС‹С… РїР»РѕСЃРєРѕСЃС‚РµР№
+// plane - РґРµР№СЃС‚РІРёС‚РµР»СЊРЅР°СЏ/РјРЅРёРјР°СЏ (0/1) С‡Р°СЃС‚Рё РєРѕРјРїР»РµРєСЃРЅРѕР№ РјР°С‚СЂРёС†С‹
    int i, j;
    for (j=0; j<size_y; j++) {
       for (i=0; i<size_x; i++) {

@@ -40,7 +40,7 @@
 
 #define DEFAULT_CORRECTION 0.5
 
-#define STRING_LENGTH 100 // Костыль для обхода косячащих имен файлов -- пофиксить!
+#define STRING_LENGTH 100 // РљРѕСЃС‚С‹Р»СЊ РґР»СЏ РѕР±С…РѕРґР° РєРѕСЃСЏС‡Р°С‰РёС… РёРјРµРЅ С„Р°Р№Р»РѕРІ -- РїРѕС„РёРєСЃРёС‚СЊ!
 #define FORMAT_LENGTH 10
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -63,16 +63,16 @@ int _tmain(int argc, _TCHAR* argv[])
    l_uint32 val32;
 
 
-   char input_file_name[STRING_LENGTH]="in.arx";       // Имя входного файла с изображением
-   char *output_re_file_name;                          // Имя выходного файла для Re-части
-   char *output_im_file_name;                          // Имя выходного файла для Im-части
-   char *output_bin_file_name;                         // Имя выходного файла для бинаризованной Im-части
+   char input_file_name[STRING_LENGTH]="in.arx";       // РРјСЏ РІС…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р° СЃ РёР·РѕР±СЂР°Р¶РµРЅРёРµРј
+   char *output_re_file_name;                          // РРјСЏ РІС‹С…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р° РґР»СЏ Re-С‡Р°СЃС‚Рё
+   char *output_im_file_name;                          // РРјСЏ РІС‹С…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р° РґР»СЏ Im-С‡Р°СЃС‚Рё
+   char *output_bin_file_name;                         // РРјСЏ РІС‹С…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р° РґР»СЏ Р±РёРЅР°СЂРёР·РѕРІР°РЅРЅРѕР№ Im-С‡Р°СЃС‚Рё
    char *tmpstr;
    char *fmtstr;
 //   char dummystring[50]="thisisadummystring\0";
 
-//   char source_file_name[20]="source.arx";             // Имя выходного файла
-//   FILE *in, *out_re, *out_im, *src;                   // Идентификаторы входного и выходного файлов
+//   char source_file_name[20]="source.arx";             // РРјСЏ РІС‹С…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°
+//   FILE *in, *out_re, *out_im, *src;                   // РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂС‹ РІС…РѕРґРЅРѕРіРѕ Рё РІС‹С…РѕРґРЅРѕРіРѕ С„Р°Р№Р»РѕРІ
 
    PIX *pix_in;
 
@@ -83,7 +83,7 @@ int _tmain(int argc, _TCHAR* argv[])
       strcpy(input_file_name, argv[1]);
    }
 
-//------------------ Считываем файл leptonica-ой ----------------------------
+//------------------ РЎС‡РёС‚С‹РІР°РµРј С„Р°Р№Р» leptonica-РѕР№ ----------------------------
    printf("\nReading input...");
    pix_in=pixRead(input_file_name);
 
@@ -101,7 +101,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
    printf("OK\n");
 
-// Выделяем память под строки для имен файлов
+// Р’С‹РґРµР»СЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ СЃС‚СЂРѕРєРё РґР»СЏ РёРјРµРЅ С„Р°Р№Р»РѕРІ
 
    if ((output_re_file_name = (char *) malloc(sizeof(char)*STRING_LENGTH)) == NULL) {
        printf("Not enough memory to allocate buffer.\n");
@@ -189,7 +189,7 @@ int _tmain(int argc, _TCHAR* argv[])
 //   printf("Output re: %s\nOutput im: %s\n\n", output_re_file_name, output_im_file_name);
    printf("Output gray: %s\nOutput bin: %s\n\n", output_im_file_name, output_bin_file_name);
 
-//------------------ Выдеяем память под массивы -----------------------------
+//------------------ Р’С‹РґРµСЏРµРј РїР°РјСЏС‚СЊ РїРѕРґ РјР°СЃСЃРёРІС‹ -----------------------------
    target_amp = (double*) fftw_malloc(Nx*Ny*sizeof(double));
    source_amp = (double*) fftw_malloc(Nx*Ny*sizeof(double));
    tmp_amp = (double*) fftw_malloc(Nx*Ny*sizeof(double));
@@ -235,7 +235,7 @@ int _tmain(int argc, _TCHAR* argv[])
       return 5;
    };
 
-//---------- Подготовка FFTW ------------------------------------------------
+//---------- РџРѕРґРіРѕС‚РѕРІРєР° FFTW ------------------------------------------------
    plan_fwd = fftw_plan_dft_2d(Nx, Ny, com_B, com_C, FFTW_FORWARD, FFTW_ESTIMATE);
    plan_bwd = fftw_plan_dft_2d(Nx, Ny, com_D, com_A, FFTW_BACKWARD, FFTW_ESTIMATE);
 //   plan_fwd = fftw_plan_dft_2d(Nx, Ny, &com_I[0][0], &com_I[0][0], FFTW_FORWARD, FFTW_ESTIMATE);
@@ -301,18 +301,18 @@ error margins
  }
 
 */
-//---------- Подготавливаем source_amp --------------------------------------
+//---------- РџРѕРґРіРѕС‚Р°РІР»РёРІР°РµРј source_amp --------------------------------------
 //   fread(bitmap_re, Nx*Ny*sizeof(unsigned char), 1, src);
 //   bitmap_to_double(source_amp, bitmap_re, Nx, Ny);
 //   norm_double(source_amp, Nx, Ny, 1);
 
-//////////// Алгоритм Gerschberg-Saxton //////////////////////////////////////
+//////////// РђР»РіРѕСЂРёС‚Рј Gerschberg-Saxton //////////////////////////////////////
 
-//---------- Считываем растр для расчёта ------------------------------------
+//---------- РЎС‡РёС‚С‹РІР°РµРј СЂР°СЃС‚СЂ РґР»СЏ СЂР°СЃС‡С‘С‚Р° ------------------------------------
 //   fread(bitmap_re, Nx*Ny*sizeof(unsigned char), 1, in);
 
-//---------- Заполняем комплексную матрицу изображения ----------------------
-//---------- re-часть - растр, ----------------------------------------------
+//---------- Р—Р°РїРѕР»РЅСЏРµРј РєРѕРјРїР»РµРєСЃРЅСѓСЋ РјР°С‚СЂРёС†Сѓ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ ----------------------
+//---------- re-С‡Р°СЃС‚СЊ - СЂР°СЃС‚СЂ, ----------------------------------------------
    for (i = 0; i < h; i++) {
       for (j = 0; j < w; j++) {
          pixGetPixel(pix_in, j, i, &val32);
@@ -324,22 +324,22 @@ error margins
    printf("Interating...\n\n");
 
    bitmap_to_double(target_amp, bitmap_re, Nx, Ny);
-//---------- Нормируем re-часть на 1 ----------------------------------------
+//---------- РќРѕСЂРјРёСЂСѓРµРј re-С‡Р°СЃС‚СЊ РЅР° 1 ----------------------------------------
    norm_double(target_amp, Nx, Ny, 1);
-//---------- Корректируем изображение по sinc -------------------------------
+//---------- РљРѕСЂСЂРµРєС‚РёСЂСѓРµРј РёР·РѕР±СЂР°Р¶РµРЅРёРµ РїРѕ sinc -------------------------------
    double_sinc(target_amp, Nx, Ny, DEFAULT_CORRECTION);
 
 //   memcpy(tmp_phs, target_amp, Nx*Ny*sizeof(double));
 //goto l2;
 
-//---------- Меняем четверти матрицы местами по диагонали -------------------
+//---------- РњРµРЅСЏРµРј С‡РµС‚РІРµСЂС‚Рё РјР°С‚СЂРёС†С‹ РјРµСЃС‚Р°РјРё РїРѕ РґРёР°РіРѕРЅР°Р»Рё -------------------
    double_shift(target_amp, Nx, Ny);
    set_plane((double *)com_D, target_amp, Nx, Ny, PLANE_RE);
-//---------- im-часть - случайный шум ---------------------------------------
+//---------- im-С‡Р°СЃС‚СЊ - СЃР»СѓС‡Р°Р№РЅС‹Р№ С€СѓРј ---------------------------------------
    com_fill_plane((double *)com_D, Nx, Ny, PLANE_IM, 255, RND_TRUE);
 //   com_fill_plane((double *)com_D, Nx, Ny, PLANE_IM, 0, RND_FALSE);
 
-//---------- Вычисляем исходную среднюю интенсивность -----------------------
+//---------- Р’С‹С‡РёСЃР»СЏРµРј РёСЃС…РѕРґРЅСѓСЋ СЃСЂРµРґРЅСЋСЋ РёРЅС‚РµРЅСЃРёРІРЅРѕСЃС‚СЊ -----------------------
 //   avg1=double_avg(target_amp, Nx, Ny, ABS_TRUE);
 
    fftw_execute(plan_bwd);           // A = IFT(D) (D = target)
@@ -364,7 +364,7 @@ error margins
    com_get_phase((double *)com_A, tmp_phs, Nx, Ny);
    double_rescale(tmp_phs, Nx, Ny, COLOR_MIN, COLOR_MAX);
 
-//---------- Пишем серый киноформ в файл ---------------------------------------
+//---------- РџРёС€РµРј СЃРµСЂС‹Р№ РєРёРЅРѕС„РѕСЂРј РІ С„Р°Р№Р» ---------------------------------------
    double_to_bitmap(tmp_phs, bitmap_im, Nx, Ny);
 
    printf("\nWriting gray...");
@@ -402,7 +402,7 @@ error margins
    }
 /**/
 /*
-// Среднеквадратичное отклонение между модулем I2 и re-частью I
+// РЎСЂРµРґРЅРµРєРІР°РґСЂР°С‚РёС‡РЅРѕРµ РѕС‚РєР»РѕРЅРµРЅРёРµ РјРµР¶РґСѓ РјРѕРґСѓР»РµРј I2 Рё re-С‡Р°СЃС‚СЊСЋ I
       get_plane_abs((double *)com_I2, double_amp, Nx, Ny, PLANE_RE);
       get_plane((double *)com_I, double_phs, Nx, Ny, PLANE_RE);
       rmse=com_rmse(double_amp, double_phs, Nx, Ny);
@@ -411,7 +411,7 @@ error margins
    }
 */
 
-//---------- Бинарный киноформ -----------
+//---------- Р‘РёРЅР°СЂРЅС‹Р№ РєРёРЅРѕС„РѕСЂРј -----------
    com_get_phase((double *)com_A, tmp_phs, Nx, Ny);
 //   double_echo(tmp_phs, Nx, Ny);
 
@@ -432,12 +432,12 @@ l2:
    printf("OK\n");
 
 l1:
-//--------- Завершаем работу с FFTW -----------------------------------------
+//--------- Р—Р°РІРµСЂС€Р°РµРј СЂР°Р±РѕС‚Сѓ СЃ FFTW -----------------------------------------
    fftw_destroy_plan(plan_fwd);
    fftw_destroy_plan(plan_bwd);
-//--------- Завершаем работу с PIX ------------------------------------------
+//--------- Р—Р°РІРµСЂС€Р°РµРј СЂР°Р±РѕС‚Сѓ СЃ PIX ------------------------------------------
    pixDestroy(&pix_in);
-//---------- Освобождаем память ---------------------------------------------
+//---------- РћСЃРІРѕР±РѕР¶РґР°РµРј РїР°РјСЏС‚СЊ ---------------------------------------------
 
    free(output_re_file_name);
    free(output_im_file_name);
