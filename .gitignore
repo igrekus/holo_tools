@@ -1,3 +1,5 @@
 .idea/
 
 ref/
+
+cmake-build-debug/
